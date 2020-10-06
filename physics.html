@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+    processEscapes: true
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: {autoNumber: "AMS"} }
+});
+</script>
+
+<style>
+ body{
+  font-family: serif;
+  background: #eeeeee;
+ }
+ 
+ h1{
+  width: 600px;
+  padding: 0px 100px;
+ }
+ 
+ h2{
+  width: auto;
+  padding: 0px 120px;
+ }
+ 
+ p{
+  width: auto;
+  padding: 0px 140px;
+  <!--white-space: pre;-->
+ }
+
+</style>
+
+<html>
+
+$
+\newcommand{\vect}[1]
+{\boldsymbol #1}
+$
+
+
+<body>
+
+<title>
+物理学
+</title>
+
+
+<h1>物理学</h1>
+
+<p>
+ここではビリアル定理をより一般的な形で導く。まずテンソル・ビリアル定理を導き、
+そこから通常のビリアル定理を導く。
+
+出発点は流体方程式：
+\begin{align}
+\rho\left(\frac{\partial v_{i}}{\partial t} + v_{k}\frac{\partial v_{i}}{\partial x_{k}}\right)
+ = 
+\frac{\partial \sigma_{ik}}{\partial x_{k}} - \rho \frac{\partial \phi}{\partial x_{i}}, 
+\end{align}
+およびポアソン方程式：
+\begin{align}
+\nabla^{2}\phi = 4\pi G \rho
+\end{align}
+である。
+
+
+いま、系の慣性モーメント$I_{ij}$を
+\begin{align}
+I_{ij} = \int_{\mathbb{R}^{3}} d^{3}x~\rho x_{i}x_{j}
+\end{align}
+により定義し、これが満たす方程式を導こう。まず$I_{ij}$を時間について微分すると
+\begin{align}
+\frac{d}{dt}I_{ij} &= \int_{\mathbb{R}^{3}} d^{3}x~\rho \frac{D}{Dt}(x_{i}x_{j}) 
+\nonumber \\
+&= \int_{\mathbb{R}^{3}} d^{3}x~\rho (x_{i}v_{j} + x_{j}v_{i})
+\end{align}
+となる。一行目の変形は、まあ考えりゃあわかる。これをさらに時間について微分すると
+\begin{align}
+\frac{d^{2}}{dt^{2}}I_{ij} &= \int_{\mathbb{R}^{3}} d^{3}x~\rho
+\left(
+2v_{i}v_{j} + x_{i}\frac{Dv_{j}}{Dt} + x_{j}\frac{Dv_{i}}{Dt}
+\right)
+\end{align}
+が得られる。ここで流体方程式を用いれば
+\begin{align}
+\int_{\mathbb{R}^{3}} d^{3}x~\rho x_{i}\frac{Dv_{j}}{Dt}
+&= \int_{\mathbb{R}^{3}} d^{3}x~x_{i} \left(
+\frac{\partial \sigma_{jk}}{\partial x_{k}} -\rho\frac{\partial \phi}{\partial x_{j}}
+\right) \nonumber\\
+&= - \int_{\mathbb{R}^{3}} d^{3}x~\sigma_{ij}
+ - \int_{\mathbb{R}^{3}} d^{3}x~ \rho x_{i}\frac{\partial \phi}{\partial x_{j}}
+\end{align}
+である。ただし、表面項は無視した。表面項は、シェーンベルグ・チャンドラセカール限界
+を議論するときに必要となる。
+この第二項はポアソン方程式を用いれば被積分関数は$\phi$だけで表されるが、
+それの積分は部分積分を繰り返すことにより次のように求まる：
+\begin{align}
+\int_{\mathbb{R}^{3}} d^{3}x~ (\nabla^{2}\phi)x_{i}\partial_{j}\phi
+&=
+\int_{\mathbb{R}^{3}} d^{3}x~(2\phi\partial_{i}\partial_{j}\phi-\delta_{ij}\phi\nabla^{2}\phi)
+- \int_{\mathbb{R}^{3}} d^{3}x~x_{i}\partial_{j}\phi \nabla^{2}\phi
+\end{align}
+だから、
+\begin{align}
+\int_{\mathbb{R}^{3}} d^{3}x~ (\nabla^{2}\phi)x_{i}\frac{\partial \phi}{\partial x_{j}}
+=\int_{\mathbb{R}^{3}} d^{3}x~\left(
+\phi\frac{\partial^{2}}{\partial x_{i}\partial x_{j}}\phi-\frac{1}{2}\delta_{ij}\phi\nabla^{2}\phi
+\right)
+\end{align}
+が得られる。次の妥当な定義
+\begin{align}
+T_{ij} &:= \frac{1}{2}\int_{\mathbb{R}^{3}} d^{3}x~\rho v_{i}v_{j}, \\
+\Pi_{ij} &:= -\int_{\mathbb{R}^{3}} d^{3}x~ \sigma_{ij}, \\
+W_{ij} &:= -\frac{1}{2}\int_{\mathbb{R}^{3}} d^{3}x~\rho \left(
+x_{i}\frac{\partial \phi}{\partial x_{j}} + x_{j}\frac{\partial \phi}{\partial x_{i}}
+\right) \\
+&=
+ -4\pi G
+\int_{\mathbb{R}^{3}} d^{3}x~\left(
+\phi\frac{\partial^{2}}{\partial x_{i}\partial x_{j}}\phi-\frac{1}{2}\delta_{ij}\phi\nabla^{2}\phi
+\right)
+\end{align}
+を用いて上で得られた等式をまとめると、
+\begin{align}
+\frac{1}{2}\frac{d^{2}}{dt^{2}}I_{ij} = 2T_{ij} + W_{ij} + \Pi_{ij}
+\end{align}
+となる。これがテンソル・ビリアル定理である。これのtrace partが通常のビリアル定理であり、
+それは次のように書ける：
+\begin{align}
+\frac{1}{2}\frac{d^{2}}{dt^{2}}I_{ii}
+ = \int_{\mathbb{R}^{3}} d^{3}x~\left(
+\rho|\vect{v}|^{2}
++ \frac{1}{2}\rho\phi
+-\sigma_{ii}
+\right).
+\end{align}
+いま系は定常であるとすると$d^{2}I_{ij}/dt^{2} = 0$であり、さらに
+$\vect{v} = \vect{0},~\sigma_{ij} = -p\delta_{ij}$であるとすると
+ビリアル定理は次のようになる：
+\begin{align}
+\int_{\mathbb{R}^{3}} d^{3}x~\left(
+\frac{1}{2}\rho\phi + 3p
+\right) = 0.
+\end{align}
+これは流体の重力エネルギー$E_{\mathrm{g}}$を
+$\int_{\mathbb{R}^{3}} d^{3}x~\left(\frac{1}{2}\rho\phi\right)$と定義すれば
+次のようにも書ける：
+\begin{align}
+E_{\mathrm{g}} + 3\int_{\mathbb{R}^{3}} d^{3}x~p = 0.
+\end{align}
+
+
+
+
+
+</p>
+</body>
+</html>
+
